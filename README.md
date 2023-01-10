@@ -1,5 +1,5 @@
 # GP257
 
-This should be the base repository for the class
+This should be the base repository for the class. 
 
-- The first thing you should do is fork (make your own version of) this repo.  
+For next steps take a look at https://docs.google.com/document/d/11OSGW70sHIHiHMbiblLlSSTQmlEYo7XhSXmdDLO6SS8/edit?usp=sharing
