@@ -1,0 +1,19 @@
+2023-02-12 16:41:45,744 - my_logger - DEBUG - Entering parse function, with inputstring: file1+file2*file3, and files
+2023-02-12 16:41:45,744 - my_logger - DEBUG - Lexical analysis starts
+2023-02-12 16:41:45,752 - my_logger - INFO - File labVec1.npz has been loaded
+2023-02-12 16:41:45,755 - my_logger - INFO - File labVec2.npz has been loaded
+2023-02-12 16:41:45,758 - my_logger - INFO - File labVec3.npz has been loaded
+2023-02-12 16:41:45,758 - my_logger - DEBUG - Parsing starts (parse_e)
+2023-02-12 16:41:45,758 - my_logger - DEBUG - Parsing starts (parse_e2)
+2023-02-12 16:41:45,758 - my_logger - DEBUG - Parsing starts (parse_e3)
+2023-02-12 16:41:45,758 - my_logger - DEBUG - Parsing starts (parse_e2)
+2023-02-12 16:41:45,758 - my_logger - DEBUG - Parsing starts (parse_e3)
+2023-02-12 16:41:45,758 - my_logger - DEBUG - Parsing starts (parse_e3)
+2023-02-12 16:41:45,758 - my_logger - DEBUG - Matching starts
+2023-02-12 16:41:45,758 - my_logger - DEBUG - Enter compute function
+2023-02-12 16:41:45,758 - my_logger - DEBUG - Enter compute function
+2023-02-12 16:41:45,758 - my_logger - DEBUG - Enter compute function
+2023-02-12 16:41:45,758 - my_logger - DEBUG - Enter compute function
+2023-02-12 16:41:45,759 - my_logger - DEBUG - Enter compute function
+2023-02-12 16:41:45,763 - my_logger - INFO - The result is written to file result.npz
+2023-02-12 16:41:45,763 - my_logger - INFO - This is the end of the program
