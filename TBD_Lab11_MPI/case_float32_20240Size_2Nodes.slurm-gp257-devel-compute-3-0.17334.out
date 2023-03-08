@@ -1,6 +1,6 @@
 
 Starting sbatch script
-DATE: Mon Mar  6 01:28:46 UTC 2023, NTASKS: 16, NNODES: 2
+DATE: Tue Mar  7 17:42:24 UTC 2023, NTASKS: 16, NNODES: 2
 
 . /home/spack/spack/share/spack/setup-env.sh
 

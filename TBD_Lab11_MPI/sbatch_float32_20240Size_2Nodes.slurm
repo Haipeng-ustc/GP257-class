@@ -1,9 +1,9 @@
 #!/bin/bash
-#SBATCH --ntasks=16
-#SBATCH --ntasks-per-node=8
+#SBATCH --ntasks=64
+#SBATCH --ntasks-per-node=16
 #SBATCH --partition=preempt
 #SBATCH --exclusive
-#SBATCH --nodes=2
+#SBATCH --nodes=4
 #SBATCH -o case_float32_20240Size_2Nodes.%N.%j.out  # STDOUT
 #SBATCH -e case_float32_20240Size_2Nodes.%N.%j.err  # STDERR
 #SBATCH --threads-per-core=1
@@ -19,7 +19,7 @@
 ##*****************************************##
 ## size of N for N*N matrix
 MATSIZE=20240
-
+# MATSIZE=256
 
 ##*****************************************##
 ## Header Info
