@@ -1,22 +1,17 @@
 
 Starting sbatch script
-DATE: Tue Mar  7 18:41:55 UTC 2023, NTASKS: 64, NNODES: 4
+DATE: Thu Mar  9 11:26:05 PST 2023, NTASKS: 64, NNODES: 4
 
-. /home/spack/spack/share/spack/setup-env.sh
-
-spack load intel-oneapi-mpi
-which mpiexec
-/home/spack/spack/opt/spack/linux-centos7-skylake_avx512/gcc-8.5.0/intel-oneapi-mpi-2021.7.1-yrqwlaw7hqwlp2wolefd6dlw2sgrwfa7/mpi/2021.7.1/bin/mpiexec
-spack load python@3.10.8
+module load py-mpi4py/3.1.3_py39
 python --version
-Python 3.10.8
+Python 3.9.13
 
 Running MatMul
 
-mpiexec -n 64 python matmult_mpi_float32.py 256
-Size of the matrix : 256 x 256
+mpiexec -n 64 python matmult_mpi_float32.py 40960
+Size of the matrix : 40960 x 40960
 Number of processes: 64
-Size of local block: 32 x 32
+Size of local block: 5120 x 5120
 
 
 Sending blocks of A 0 0 to process 0
@@ -150,4 +145,4 @@ Sending blocks of B 7 7 to process 63
 
 
 Done...
-DATE: Tue Mar  7 18:42:36 UTC 2023, NTASKS: 64, NNODES: 4
+DATE: Thu Mar  9 11:28:16 PST 2023, NTASKS: 64, NNODES: 4

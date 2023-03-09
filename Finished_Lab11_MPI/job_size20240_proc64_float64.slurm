@@ -1,11 +1,11 @@
 #!/bin/bash
 #SBATCH --ntasks=64
 #SBATCH --ntasks-per-node=16
-#SBATCH --partition=preempt
+#SBATCH --partition=serc
 #SBATCH --exclusive
 #SBATCH --nodes=4
-#SBATCH -o case_float64_20240Size_4Nodes.%N.%j.out  # STDOUT
-#SBATCH -e case_float64_20240Size_4Nodes.%N.%j.err  # STDERR
+#SBATCH -o job_size20240_proc64_float64.%N.%j.out  # STDOUT
+#SBATCH -e job_size20240_proc64_float64.%N.%j.err  # STDERR
 
 #SBATCH --threads-per-core=1
 #SBATCH --time=00:30:00
@@ -32,18 +32,24 @@ echo;
 
 ##*****************************************##
 ## SPACK setup (like modules)
-echo ". /home/spack/spack/share/spack/setup-env.sh";
-. /home/spack/spack/share/spack/setup-env.sh;
-echo;
-echo "spack load intel-oneapi-mpi";
-spack load intel-oneapi-mpi;
-echo "which mpiexec";
-which mpiexec;
-echo "spack load python@3.10.8";
-spack load python@3.10.8;
+# echo ". /home/spack/spack/share/spack/setup-env.sh";
+# . /home/spack/spack/share/spack/setup-env.sh;
+# echo;
+# echo "spack load intel-oneapi-mpi";
+# spack load intel-oneapi-mpi;
+# echo "which mpiexec";
+# which mpiexec;
+# echo "spack load python@3.10.8";
+# spack load python@3.10.8;
+# echo "python --version";
+# python --version 2>&1;
+
+
+## load modules on Sherlock
+echo "module load py-mpi4py/3.1.3_py39";
+module load py-mpi4py/3.1.3_py39;
 echo "python --version";
 python --version 2>&1;
-
 
 ##*****************************************##
 ## MPI

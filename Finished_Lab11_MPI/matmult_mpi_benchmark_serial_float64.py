@@ -2,8 +2,8 @@
 #   Note: The number of processes must be a perfect square. The matrix size must be 
 #   divisible by the square root of the number of processes.
 #
-#   Usage: python test_mpi4py.py <matrix size>
-#   Example with MPI: mpirun -n 4 python test_mpi4py.py 200
+#   Usage: python matmult_mpi_benchmark_serial_float64.py <matrix size>
+#   Example with MPI: mpirun -n 4 python matmult_mpi_benchmark_serial_float64.py 200
 #
 #   Author: Haipeng Li
 #   Date: 2023-03-03
@@ -11,7 +11,6 @@
 
 
 import sys
-
 import numpy as np
 from mpi4py import MPI
 
@@ -35,7 +34,7 @@ size = int(np.sqrt(worker_size))
 block_size = int(N // size)
 
 # Setup the data type
-dtype = np.float32
+dtype = np.float64
 
 if rank == 0:
     # Check that the number of processes is a perfect square
@@ -61,6 +60,9 @@ local_A = np.zeros((block_size, N), dtype=dtype)
 local_B = np.zeros((N, block_size), dtype=dtype)
 
 if rank == 0:
+    # Set random values for A and B
+    A = np.random.rand(N, N).astype(dtype)
+    B = np.random.rand(N, N).astype(dtype)
 
     # Initialize local blocks of A and B for sending to each process
     block_A = np.zeros((block_size, N), dtype=dtype)
@@ -68,11 +70,10 @@ if rank == 0:
 
     # Set random values for A once per block on process 0 and send to each process
     for i in range(size):
-        block_A = np.random.rand(block_size, N).astype(dtype)
+        block_A = np.ascontiguousarray(A[i*block_size:(i+1)*block_size, :])
         for j in range(size):
             proc = i*size+j
-
-            # print("Sending blocks of A", i, j, "to process", proc)
+            print("Sending blocks of A", i, j, "to process", proc)
             if proc == 0:
                 local_A = block_A
             else:
@@ -80,11 +81,11 @@ if rank == 0:
 
     # Set random values for B once per block on process 0 and send to each process
     for j in range(size):
-        block_B = np.random.rand(N, block_size).astype(dtype)
+        block_B = np.ascontiguousarray(B[:, j*block_size:(j+1)*block_size])
         for i in range(size):
             proc = i*size+j
 
-            # print("Sending blocks of B", i, j, "to process", proc)
+            print("Sending blocks of B", i, j, "to process", proc)
             if proc == 0:
                 local_B = block_B
             else:
@@ -115,11 +116,10 @@ else:
                 C[i*block_size:(i+1)*block_size, 
                   j*block_size:(j+1)*block_size] = local_C
 
-# # Compare the MPI result with the serial result from np.matmul
-# if rank == 0:
-#     print("\nMPI result == Serial result: ", np.allclose(C, np.matmul(A, B)))
-#     assert np.allclose(C, np.matmul(A, B)), "MPI result != Serial result"
-#     print("\n")
+# Compare the MPI result with the serial result from np.matmul
+if rank == 0:
+    print("\nMPI result == Serial result: ", np.allclose(C, np.matmul(A, B)),"\n")
+    assert np.allclose(C, np.matmul(A, B)), "MPI result != Serial result"
     
 # Stop the MPI and clean up the MPI environment
 MPI.Finalize()
